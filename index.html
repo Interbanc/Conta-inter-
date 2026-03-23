@@ -3,116 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aviso de Conta - Inter</title>
+    <title>Interface Inter Cnpj</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        :root {
+            --inter-orange: #FF7A00;
+            --bg-gray: #F5F6F8;
+            --white: #FFFFFF;
+            --text-dark: #202021;
+            --text-gray: #666666;
         }
 
         body {
-            background-color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #E5E5E5;
+            margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
-            padding: 20px;
-            text-align: center;
         }
 
         .container {
-            max-width: 400px;
+            width: 100%;
+            max-width: 414px;
+            background-color: var(--bg-gray);
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        header {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
+            margin-bottom: 25px;
         }
 
-        /* Ícone de erro circular */
-        .error-icon {
-            width: 80px;
-            height: 80px;
-            background-color: #f2745f; /* Vermelho suave da imagem */
-            border-radius: 50%;
+        .logo-inter {
+            height: 70px; /* Ajustado para tamanho real de logo */
+        }
+
+        .header-icons {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 40px;
+            gap: 15px;
         }
 
-        .error-icon::before {
-            content: '✕';
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
+        .icon-img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        /* Tabs */
+        .tabs {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h1 {
-            font-size: 28px;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        p {
-            font-size: 16px;
-            color: #4d4d4d;
-            line-height: 1.4;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
-        strong {
-            color: #000;
-        }
-
-        /* Botão Laranja */
-        .btn-entendi {
-            background-color: #f57c00; /* Laranja Inter */
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 16px;
-            width: 100%;
-            font-size: 16px;
+        .tab {
+            background: var(--white);
+            padding: 8px 15px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
             font-weight: 600;
+        }
+
+        .tab img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+
+        /* Card de Saldo */
+        .balance-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .balance-card p {
+            color: var(--text-gray);
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+
+        .balance-card h2 {
+            margin: 0 0 24px 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .balance-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-action {
+            background: #F2F4F7;
+            text-decoration: none;
+            color: var(--text-dark);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 600;
+            gap: 8px;
+            border: none;
             cursor: pointer;
-            position: absolute;
-            bottom: 40px;
-            max-width: 90%;
         }
 
-        .btn-entendi:active {
-            background-color: #e67300;
+        /* Grid de Menu */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
         }
 
-        /* Ajuste para telas menores */
-        @media (max-width: 480px) {
-            h1 { font-size: 24px; }
-            .btn-entendi { width: calc(100% - 40px); }
+        .menu-item {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none; /* Remove sublinhado de links */
+            display: block;
+        }
+
+        .menu-item:active {
+            opacity: 0.6; /* Efeito de clique */
+        }
+
+        .icon-box {
+            background: var(--white);
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .icon-box img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Banners */
+        .banner {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .banner img {
+            width: 100%;
+            display: block;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+            color: var(--text-dark);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="error-icon"></div>
+<div class="container">
+    <header>
+        <img src="https://logodownload.org/wp-content/uploads/2018/11/banco-inter-logo-0-1.png" class="logo-inter" alt="Inter">
         
-        <h1>Sua conta foi negada há menos de 180 dias</h1>
-        
-        <p>Você poderá solicitar uma nova abertura de conta a partir de <strong>2/03/2027</strong>.</p>
+        <div class="header-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" class="icon-img" alt="Ver">
+            <img src="https://cdn-icons-png.flaticon.com/512/54/54481.png" class="icon-img" alt="Busca">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" class="icon-img" alt="Perfil">
+        </div>
+    </header>
+
+    <div class="tabs">
+        <div class="tab">
+            <img src="https://flagcdn.com/w40/br.png" alt="Brasil"> Brasil
+        </div>
+        <div class="tab" style="opacity: 0.5;">
+            <img src="https://flagcdn.com/w40/us.png" alt="Global"> Global
+        </div>
     </div>
 
-    <button class="btn-entendi">Entendi</button>
+    <div class="balance-card">
+        <p>Conta Digital</p>
+        <h2>R$ 14.175,90</h2>
+        <div class="balance-actions">
+            <a href="https://nwaskksayway.github.io/Erro-pix-final-/" class="btn-action">
+                <img src="https://logospng.org/download/pix/logo-pix-icone-512.png" style="width:18px;" alt="Pix"> Pix
+            </a>
+            <button class="btn-action">
+                <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" style="width:18px;" alt="Pagar"> Pagar
+            </button>
+        </div>
+    </div>
+
+    <div class="menu-grid">
+        <a href="https://nwaskksayway.github.io/Cr-dito-inter/" class="menu-item">
+            <div class="icon-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Cartões">
+            </div>
+            Cartões 
+        </a>
+
+        <div class="menu-item">
+            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2108/2108625.png" alt="Investir"></div>
+            Investir
+        </div>
+
+        <div class="menu-item">
+            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/3596/3596091.png" alt="Recarga"></div>
+            Recarga
+        </div>
+
+        <div class="menu-item">
+            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2311/2311523.png" alt="Mais"></div>
+            Mostrar mais
+        </div>
+    </div>
+
+    <div class="banner">
+        <img src="https://static.bancointer.com.br/blog/popup/images/8a574147a0f746fa961796f2a8f53aa0_fgts_popup_vocetemdinparado.png" alt="Banner 1">
+    </div>
+
+    <div class="section-title">Ser Inter é ter</div>
+
+    <div class="banner">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwgcUfFDXHu9vqu0lW7l_kTrc8V8S_PQB_zbyN578tFobpueILd6i-V70&s=10" alt="Banner 2">
+    </div>
+</div>
 
 </body>
 </html>
